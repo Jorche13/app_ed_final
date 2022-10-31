@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+{% block body %}
+{{ super() }}
+
+<h1 class="text-center">Forecast for the next {{data.count*3}} hours</h1>
+
+<div class="row row-cols-1 row-cols-md-2 g-4 text-center">
+    {% for time_step in data.forecast.data %}
+    <div class="col">
+        <div class="card h-100">
+            <div class="card-body">
+                <div class="row">
+                    <div class="col d-flex align-items-center justify-content-center">
+                        <h3>{{time_step.dt.strftime("%A %d")}}</h3>
+                    </div>
+                    <div class="col d-flex align-items-center justify-content-center">
+                        <h3>{{time_step.dt.strftime("%H:%M h")}}</h3>
+                    </div>
+                </div>
+
+                <img src="/static/images/{{time_step.icon}}.png" class="card-img-top w-25">
+                <h3 class="fw-bold">{{time_step.description.title()}}</h3>
+                {% if time_step.rain_three_hours %}
+                <h5>{{time_step.rain_three_hours}} mm in last 3 hours</h5>
+                {% else %}
+                <h5>No rain forecast</h5>
+                {% endif %}
+
+                <div class="row">
+                    <div class="col d-flex align-items-center justify-content-center">
+                        <h3 class="fw-bold">{{time_step.temp}}
+                            <h3><sup>°C</sup></h3>
+                        </h3>
+                    </div>
+                    <div class="col d-flex align-items-center justify-content-center">
+                        <h3 class="fw-bold">{{time_step.humidity}}
+                            <h3><sup>%</sup></h3>
+                        </h3>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+{% endblock body %}

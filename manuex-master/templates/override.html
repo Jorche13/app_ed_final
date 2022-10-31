@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+
+{% block body %}
+{{ super() }}
+
+<div class="d-flex flex-column h-100">
+  <h1>Manual Control</h1>
+
+  <div class="d-flex align-items-center justify-content-center justify-self-center flex-fill">
+    <div class="circle position-relative d-flex align-items-center justify-content-center">
+      <div class="circle transform position-absolute">
+        <div class="circle1 align-items-center d-flex justify-content-center">
+          <div class="circle2 align-items-center d-flex justify-content-center">
+          </div>
+        </div>
+
+        <svg xmlns="http://www.w3.org/2000/svg" version="1.1" width="160px" height="160px">
+          <defs>
+            <linearGradient id="GradientColor">
+              <stop offset="0%" stop-color="#1ee99b" />
+              <stop offset="100%" stop-color="#2c60db" />
+            </linearGradient>
+          </defs>
+          <circle id="circle" cx="80" cy="80" r="70" stroke-linecap="round" />
+        </svg>
+      </div>
+
+      <div class="position-relative d-flex align-items-center justify-content-center flex-column">
+        <h5 class="m-0 text-center">Last Watered:</h5>
+        <p class="m-0 text-center">{{last_watered}}</p>
+      </div>
+    </div>
+
+    <script>
+      const circle = document.getElementById("circle");
+      const percent = 76;
+      circle.style = "stroke-dashoffset: " + ((100 - percent) * (472 - 34) / 100 + 34);
+    </script>
+  </div>
+</div>
+
+{% endblock body %}

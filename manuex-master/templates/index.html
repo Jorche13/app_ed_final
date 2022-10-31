@@ -1,0 +1,58 @@
+{% extends "base.html" %}
+{% block body %}
+
+{{ super() }}
+
+<div class="px-4 py-5 my-5">
+    <img class="d-block mx-auto mb-4" src="/static/images/plant.png" alt="" width="72" height="57">
+    <h1 class="display-5 fw-bold text-center">ManueX</h1>
+    <div class="col-lg-6 mx-auto text-center">
+        <p class="lead mb-4">The first ever smart irrigator system for green facades that uses both real-time
+            weather API and sensor data.<br>
+            Thanks to the access to that data, it is able to, with great
+            precision, predict the need of the green facade to be watered with an algorithm. ManueX
+            also connects to a microcontroller and waters the system.
+        </p>
+    </div>
+    <div class="row d-flex justify-content-center mt-3">
+        <div class="col-md-8 col-lg-6 col-xl-4">
+            <div class="card" style="color: #4B515D; border-radius: 35px;">
+                <div class="card-body p-4">
+
+                    <div class="d-flex">
+                        <h6 class="flex-grow-1">{{data.current.city_name}}</h6>
+                        <h6>{{data.current.dt.strftime("%H:%M")}}h</h6>
+                    </div>
+
+                    <div class="d-flex flex-column text-center mt-5 mb-4">
+                        <h6 class="display-4 mb-0 font-weight-bold" style="color: #1C2331;"> {{data.current.temp}}°C </h6>
+                        <span class="small" style="color: #868B94">{{data.current.description.title()}}</span>
+                    </div>
+
+                    <div class="d-flex align-items-center">
+                        <div class="flex-grow-1" style="font-size: 1rem;">
+                            <div><i class="fas fa-tint fa-fw" style="color: #868B94;"></i> <span class="ms-1"> {{data.current.humidity}}% </span>
+                            </div>
+                            {% if data.current.rain_last_hour %}
+                            <div><i class="fas fa-sun fa-fw" style="color: #868B94;"></i> <span class="ms-1"> {{data.current.rain_last_hour}} mm </span>
+                            </div>
+                            {% else %}
+                            <div><i class="fas fa-cloud-rain fa-fw" style="color: #868B94;"></i> <span class="ms-1"> No rain </span>
+                            </div>
+                            {% endif %}
+                            <div><i class="fas fa-leaf fa-fw" style="color: #868B94;"></i> <span class="ms-1"> {{sensor_moisture}}% </span>
+                            </div>
+                        </div>
+                        <div>
+                            <img src="/static/images/{{data.current.icon}}.png" width="100px">
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+{% endblock %}

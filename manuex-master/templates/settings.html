@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+
+{% block body %}
+{{ super() }}
+
+<h1 class="pb-3">Settings</h1>
+<form method="post">
+    <ul class="list-group list-group-light">
+        <li class="list-group-item">
+            <div class="mb-3">
+                <label for="location" class="form-label">City Name: </label>
+                <input class="form-control" type="text" name="location" value="{{location}}">
+            </div>
+        </li>
+        <li class="list-group-item">
+            <label for="threshold" class="form-label">Moisture Threshold:</label>
+            <input class="form-range" type="range" min="0" max="100" value="{{threshold}}" name="threshold">
+        </li>
+        <li class="list-group-item">
+            <label for="water-amount" class="form-label">Amount of Water:</label>
+            <input type="range" class="form-range" min="0" max="100" value="{{water_amount}}" name="water-amount">
+        </li>
+        <button class="btn btn-success" type="submit">Apply</button>
+    </ul>
+</form>
+
+{% endblock body %}
